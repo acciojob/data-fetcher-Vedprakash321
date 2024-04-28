@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import './../styles/App.css';
 
+
 const App = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +16,7 @@ const App = () => {
         setData(jsonData);
         setLoading(false);
       } catch (error) {
-        console.error('No data found', error);
+        console.error('No Data Found:', error);
         setLoading(false);
       }
     };
@@ -23,21 +24,21 @@ const App = () => {
     fetchData();
   }, []);
 
-
-
-
   return (
     <div>
-         {loading ? (
+      {loading ? (
         <p>Loading...</p>
       ) : (
         <div>
-          <h1>Data Fetching From API</h1>
+          <h1>Data Fetched from API</h1>
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
+
+
+
 
 export default App
