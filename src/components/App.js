@@ -1,5 +1,6 @@
 
-import React from "react";
+
+import React, { useState, useEffect } from 'react';
 import './../styles/App.css';
 
 const App = () => {
@@ -14,7 +15,7 @@ const App = () => {
         setData(jsonData);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('No data found', error);
         setLoading(false);
       }
     };
