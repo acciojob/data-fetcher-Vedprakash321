@@ -1,15 +1,15 @@
 
-
 import React, { useState, useEffect } from 'react';
 import './../styles/App.css';
 
 
 const App = () => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+
     const fetchData = async () => {
       try {
         const response = await fetch('https://dummyjson.com/products');
@@ -21,29 +21,26 @@ const App = () => {
           throw new Error('No data found');
         }
         setData(jsonData);
-        setLoading(false);
+        setIsLoading(false);
       } catch (error) {
         setError(error.message);
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+    }, []);
 
   return (
     <div>
-      {loading ? (
+      {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p>{error}</p>
-      ) : data ? (
-        <div>
-          <h1>Data Fetched</h1>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
-        </div>
+        <p>Error: {error}</p>
+      ) : !data ? (
+        <p>No data found</p>
       ) : (
-        <p>No data found</p> // Displayed when data is empty
+        <pre>{JSON.stringify(data, null, 2)}</pre>
       )}
     </div>
   );
